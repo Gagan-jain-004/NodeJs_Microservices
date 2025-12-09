@@ -1,0 +1,23 @@
+
+services:
+  mongo:
+    # image: mongo:5
+    image: mongodb/mongodb-community-server:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db  
+
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    ports:
+      - "3001:3001"
+    depends_on:        # Ensure MongoDB starts before user-service
+      - mongo
+
+volumes:
+  mongo_data:
+           
+    
