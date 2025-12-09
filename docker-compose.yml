@@ -17,6 +17,14 @@ services:
     depends_on:        # Ensure MongoDB starts before user-service
       - mongo
 
+  task-service:
+    build: ./task-service
+    container_name: task-service
+    ports:
+      - "3002:3002"
+    depends_on:        # Ensure MongoDB starts before user-service
+      - mongo
+
 volumes:
   mongo_data:
            
